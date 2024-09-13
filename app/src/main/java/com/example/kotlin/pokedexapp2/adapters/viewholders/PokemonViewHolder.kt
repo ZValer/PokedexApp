@@ -1,4 +1,4 @@
-package com.example.kotlin.pokedexapp2
+package com.example.kotlin.pokedexapp2.adapters.viewholders
 
 import android.content.Context
 import android.widget.ImageView
@@ -7,6 +7,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.kotlin.pokedexapp2.PokemonBase
+import com.example.kotlin.pokedexapp2.PokemonRepository
 import com.example.kotlin.pokedexapp2.databinding.ItemPokemonBinding
 import com.example.kotlin.pokedexapp2.pokemon.Pokemon
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PokemonViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: PokemonBase,context:Context){
+    fun bind(item: PokemonBase, context:Context){
         binding.TVName.text = item.name
         getPokemonInfo(item.url,binding.IVPhoto,context)
     }

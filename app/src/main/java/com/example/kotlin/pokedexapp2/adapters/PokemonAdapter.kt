@@ -1,16 +1,18 @@
-package com.example.kotlin.pokedexapp2
+package com.example.kotlin.pokedexapp2.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlin.pokedexapp2.PokemonBase
+import com.example.kotlin.pokedexapp2.adapters.viewholders.PokemonViewHolder
 import com.example.kotlin.pokedexapp2.databinding.ItemPokemonBinding
 
 class PokemonAdapter: RecyclerView.Adapter<PokemonViewHolder>() {
     var data:ArrayList<PokemonBase> = ArrayList()
     lateinit var context: Context
 
-    fun PokemonAdapter(basicData : ArrayList<PokemonBase>,context:Context){
+    fun PokemonAdapter(basicData : ArrayList<PokemonBase>, context:Context){
         this.data = basicData
         this.context = context
     }
