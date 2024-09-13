@@ -7,10 +7,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.kotlin.pokedexapp2.PokemonBase
-import com.example.kotlin.pokedexapp2.PokemonRepository
+import com.example.kotlin.pokedexapp2.model.PokemonBase
+import com.example.kotlin.pokedexapp2.model.PokemonRepository
 import com.example.kotlin.pokedexapp2.databinding.ItemPokemonBinding
-import com.example.kotlin.pokedexapp2.pokemon.Pokemon
+import com.example.kotlin.pokedexapp2.model.pokemon.Pokemon
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +29,7 @@ class PokemonViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.
 
         CoroutineScope(Dispatchers.IO).launch {
             val pokemonRepository = PokemonRepository()
-            val result: Pokemon? = pokemonRepository.getPokemonInfo(pokemonNumber)
+            val result: com.example.kotlin.pokedexapp2.model.pokemon.Pokemon? = pokemonRepository.getPokemonInfo(pokemonNumber)
             CoroutineScope(Dispatchers.Main).launch {
                 val urlImage = result?.sprites?.other?.official_artwork?.front_default.toString()
 
