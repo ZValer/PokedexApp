@@ -3,6 +3,8 @@ package com.example.kotlin.pokedexapp2.views
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlin.pokedexapp2.utils.Constants
 import com.example.kotlin.pokedexapp2.adapters.PokemonAdapter
@@ -10,12 +12,14 @@ import com.example.kotlin.pokedexapp2.databinding.ActivityMainBinding
 import com.example.kotlin.pokedexapp2.model.PokedexObject
 import com.example.kotlin.pokedexapp2.model.PokemonBase
 import com.example.kotlin.pokedexapp2.model.PokemonRepository
+import com.example.kotlin.pokedexapp2.viewmodel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity: Activity() {
+class MainActivity: AppCompatActivity() {
 
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private val adapter : PokemonAdapter = PokemonAdapter()
     private lateinit var data:ArrayList<PokemonBase>
@@ -24,12 +28,19 @@ class MainActivity: Activity() {
         super.onCreate(savedInstanceState)
 
         initializeBinding()
-        getPokemonList()
+        initializeObservers()
+        viewModel.getPokemonList()
     }
 
     private fun initializeBinding() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    private fun initializeObservers(){
+        viewModel.pokedexObjectLiveData.observe(this){ poxedexObject ->
+            setUpRecyclerView(poxedexObject.results)
+        }
     }
 
     private fun getPokemonList(){
