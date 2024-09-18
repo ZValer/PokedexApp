@@ -1,4 +1,4 @@
-package com.example.kotlin.pokedexapp2.framework.views
+package com.example.kotlin.pokedexapp2.framework.views.activities
 
 import android.content.Intent
 import android.os.Bundle
