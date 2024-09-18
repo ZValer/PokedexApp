@@ -15,27 +15,38 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+// ViewHolder para el RecyclerView que muestra los datos de cada Pokémon.
+// Mantiene las referencias a las vistas de un item y asocia los datos.
+
 class PokemonViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root) {
 
-
-    fun bind(item: PokemonBase, context:Context){
+    // Enlaza los datos de un objeto `PokemonBase` con las vistas.
+    fun bind(item: PokemonBase, context: Context) {
+        // Asigna el nombre del Pokémon al TextView
         binding.TVName.text = item.name
-        getPokemonInfo(item.url,binding.IVPhoto,context)
+        // Obtiene la imagen del Pokémon y la asigna al ImageView
+        getPokemonInfo(item.url, binding.IVPhoto, context)
     }
 
-    private fun getPokemonInfo(url:String, imageView:ImageView,context:Context){
-        //"https://pokeapi.co/api/v2/pokemon/23/"
-        var pokemonStringNumber:String = url.replace("https://pokeapi.co/api/v2/pokemon/","")
-        pokemonStringNumber = pokemonStringNumber.replace("/","")
-        val pokemonNumber:Int = Integer.parseInt(pokemonStringNumber)
+    // Obtiene la información detallada de un Pokémon mediante API.
+    // Usa la URL del Pokémon para extraer su número, hace una solicitud de información y carga la imagen con Glide.
+    private fun getPokemonInfo(url: String, imageView: ImageView, context: Context) {
+        // Extrae el número del Pokémon de la URL
+        var pokemonStringNumber: String = url.replace("https://pokeapi.co/api/v2/pokemon/", "")
+        pokemonStringNumber = pokemonStringNumber.replace("/", "")
+        val pokemonNumber: Int = Integer.parseInt(pokemonStringNumber)
 
+        // Corutina para llamar el requirement para obtener la info del Pokémon
         CoroutineScope(Dispatchers.IO).launch {
             val pokemonInfoRequirement = PokemonInfoRequirement()
             val result: Pokemon? = pokemonInfoRequirement(pokemonNumber)
+
+            // Vuelve al hilo principal para cargar la imagen en la interfaz
             CoroutineScope(Dispatchers.Main).launch {
                 val urlImage = result?.sprites?.other?.official_artwork?.front_default.toString()
 
-                val requestOptions =  RequestOptions()
+                // Usa Glide para cargar la imagen del Pokémon en el ImageView
+                val requestOptions = RequestOptions()
                     .centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .fitCenter()
@@ -45,5 +56,6 @@ class PokemonViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.
                     .apply(requestOptions)
                     .into(imageView)
             }
-        }    }
+        }
+    }
 }
