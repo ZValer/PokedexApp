@@ -1,6 +1,7 @@
 package com.example.kotlin.pokedexapp2.framework.adapters.viewholders
 
 import android.content.Context
+import android.content.Intent
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,6 +12,9 @@ import com.example.kotlin.pokedexapp2.data.network.model.PokemonBase
 import com.example.kotlin.pokedexapp2.data.network.model.pokemon.Pokemon
 import com.example.kotlin.pokedexapp2.databinding.ItemPokemonBinding
 import com.example.kotlin.pokedexapp2.domain.PokemonInfoRequirement
+import com.example.kotlin.pokedexapp2.framework.views.activities.PokemonDetailActivity
+import com.example.kotlin.pokedexapp2.utilities.Constants
+import com.example.kotlin.pokedexapp2.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +30,13 @@ class PokemonViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.
         binding.TVName.text = item.name
         // Obtiene la imagen del Pokémon y la asigna al ImageView
         getPokemonInfo(item.url, binding.IVPhoto, context)
+
+        binding.llPokemon.setOnClickListener {
+            passViewGoToPokemonDetail(item.url,context)
+        }
+
     }
+
 
     // Obtiene la información detallada de un Pokémon mediante API.
     // Usa la URL del Pokémon para extraer su número, hace una solicitud de información y carga la imagen con Glide.
@@ -57,5 +67,12 @@ class PokemonViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.
                     .into(imageView)
             }
         }
+    }
+
+    private fun passViewGoToPokemonDetail(url: String,context:Context){
+        var intent: Intent = Intent(context, PokemonDetailActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        context.startActivity(intent)
+        intent.putExtra(Constants.URL_POKEMON,url)
     }
 }
