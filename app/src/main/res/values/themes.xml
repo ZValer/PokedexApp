@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.PokedexApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryDark</item>
+        <item name="colorOnPrimary">@color/semiWhite</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/accentVariant2</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/textIcons</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.PokedexApp.NoActionBar">
+        <!-- Disables the Action Bar at the top of the screen -->
+        <item name="windowActionBar">false</item>
+
+        <!-- Removes the title from the app window -->
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+</resources>
+
+    <!--
+
+    In Android, themes define the overall look and feel of your app, like colors, fonts,
+    and styles applied globally across your app. They are defined in the themes.xml file
+    and allow you to customize things like the app's background, text appearance, button
+    styles, etc. Themes help maintain consistency in your app's appearance and can adapt
+    based on light or dark modes.
+
+    -->

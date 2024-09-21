@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Declaring that the file is an XML layout and specifying the encoding type -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    >
+    <!-- A RelativeLayout is a layout container where child views can be positioned
+    relative to each other or the parent.
+
+    In this case: Makes the layout take up the full width and height of the parent (screen).
+     -->
+
+    <!-- A RecyclerView is a scrollable list of items, taking the full width
+    and height of the screen -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/RVPokemon"
+        />
+    <!-- The id RVPokemon is used to reference this RecyclerView in the code -->
+
+</RelativeLayout>
+
+    <!-- In Android Studio, the layout folder is where you store all the XML files
+    that define the user interface (UI) for your app. These XML files describe how UI
+    elements like buttons, text fields, images, and other components are arranged on
+    the screen. Each screen or fragment in your app typically has its own layout file
+    inside this folder.-->

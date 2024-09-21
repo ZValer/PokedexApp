@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PokedexApp</string>
+</resources>
+
+    <!--
+
+    String Definitions: You define each text value with a
+    unique key (name), and then use that key throughout your app,
+    instead of hardcoding text directly into layouts or code. This promotes
+    reusability and consistency.
+
+    <string name="welcome_message">Welcome to Pokedex App!</string>
+
+    -->

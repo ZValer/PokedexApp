@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="4dp"
+    android:id="@+id/llPokemon"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="8dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_gravity="center"
+                android:id="@+id/IVPhoto"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Nombre"
+                android:id="@+id/TVName"
+                android:textAllCaps="true"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+    <!-- A TextView that displays the text "Nombre" -->
+    <!-- It has a font size of 18sp, text color of black, and is centered horizontally -->
+    <!-- The ID is 'TVName' for referencing in the code -->
+
+    <!-- In your XML layout, the attribute android:text="Nombre" is setting the default text
+    for the TextView. The word "Nombre" (which means "Name" in Spanish) is just a placeholder
+    that appears in the TextView before any dynamic content is added.
+
+    Since this TextView has the ID @+id/TVName, in your code (likely in your activity or fragment),
+    you will reference this ID to update the text dynamically. For example, if you're displaying
+    Pokémon names, you will update this TextView to show the actual Pokémon name instead of the
+    default "Nombre." -->
