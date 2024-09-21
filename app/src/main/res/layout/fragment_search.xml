@@ -5,12 +5,24 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tituloBusqueda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Búsqueda"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:textSize="18sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold"/>
+
+    <!-- Botón con texto "Mis tareas" y un icono a la izquierda -->
+    <Button
+        android:id="@+id/btn_mis_tareas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mis tareas"
+        android:drawableLeft="@drawable/icon_tareas"
+        android:layout_below="@id/tituloBusqueda"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"/>
 </RelativeLayout>
