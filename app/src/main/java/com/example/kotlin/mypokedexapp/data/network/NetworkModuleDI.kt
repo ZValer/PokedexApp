@@ -5,37 +5,43 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-// This object represents a dependency injection (DI) module for network-related components.
-// It is responsible for setting up the Retrofit instance to handle API calls and configuring the network client.
+// Este objeto representa un módulo de inyección de dependencias (DI) para componentes
+// relacionados con la red.
+// Es responsable de configurar la instancia de Retrofit para manejar las llamadas a la API
+// y de configurar el cliente de red.
 object NetworkModuleDI {
 
-    // GsonConverterFactory is used to convert JSON responses from the API into Kotlin objects.
+    // GsonConverterFactory se utiliza para convertir las respuestas JSON de la API en objetos
+    // de Kotlin.
     private val gsonFactory: GsonConverterFactory = GsonConverterFactory.create()
 
-    // OkHttpClient is a basic HTTP client that will be used by Retrofit to manage network requests.
+    // OkHttpClient es un cliente HTTP básico que será utilizado por Retrofit para gestionar
+    // las solicitudes de red.
     private val okHttpClient: OkHttpClient = OkHttpClient()
 
-    // The invoke() function returns an instance of PokemonAPIService when called.
-    // This is where the Retrofit object is created and configured to make network calls.
+    // La función invoke() devuelve una instancia de PokemonAPIService cuando se llama.
+    // Aquí es donde se crea y configura el objeto Retrofit para realizar llamadas de red.
     operator fun invoke(): PokemonAPIService {
         return Retrofit.Builder()
-            // The base URL for the API is retrieved from the Constants class.
+            // La URL base para la API se recupera de la clase Constants.
             .baseUrl(Constants.BASE_URL)
-            // The OkHttpClient is provided for network communication.
+            // Se proporciona OkHttpClient para la comunicación de red.
             .client(okHttpClient)
-            // The GsonConverterFactory is used to convert the API's JSON responses into Kotlin objects.
+            // GsonConverterFactory se utiliza para convertir las respuestas JSON de la API
+            // en objetos de Kotlin.
             .addConverterFactory(gsonFactory)
-            // Build the Retrofit instance and create the API service interface (PokemonAPIService).
+            // Se construye la instancia de Retrofit y se crea la interfaz del servicio API
+            // (PokemonAPIService).
             .build()
             .create(PokemonAPIService::class.java)
     }
 }
 
-
 /*
 * object NetworkModuleDI:
-* This is a singleton object in Kotlin, which means it only has one instance throughout the app.
-* It's often used in dependency injection (DI) patterns to provide dependencies like network
-* services across the app. In this case, it is responsible for providing an instance of
-* PokemonAPIService, which is the service interface for making network requests (using Retrofit).
-* */
+* Este es un objeto singleton en Kotlin, lo que significa que solo tiene una instancia en toda
+* la aplicación. A menudo se utiliza en patrones de inyección de dependencias (DI) para
+* proporcionar dependencias como servicios de red en toda la aplicación.
+* En este caso, es responsable de proporcionar una instancia de PokemonAPIService,
+* que es la interfaz del servicio para realizar solicitudes de red (usando Retrofit).
+*/

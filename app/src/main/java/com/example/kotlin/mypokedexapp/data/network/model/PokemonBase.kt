@@ -2,13 +2,13 @@ package com.example.kotlin.mypokedexapp.data.network.model
 
 import com.google.gson.annotations.SerializedName
 
-// A data class that represents basic information about a single Pokémon in the API response.
+// Clase de datos que representa info básica sobre un Pokémon en la respuesta de la API.
 data class PokemonBase(
-    // The @SerializedName annotation maps the JSON field "name" to this property.
-    // It stores the name of the Pokémon.
+    // La anotación @SerializedName mapea el campo JSON "name" a esta propiedad.
+    // Almacena el nombre del Pokémon.
     @SerializedName("name") val name: String,
 
-    // The @SerializedName annotation maps the JSON field "url" to this property.
-    // It stores the URL that contains more information about the Pokémon.
+    // La anotación @SerializedName mapea el campo JSON "url" a esta propiedad.
+    // Almacena la URL que contiene más información sobre el Pokémon.
     @SerializedName("url") val url: String
 )

@@ -12,15 +12,22 @@ import com.example.kotlin.mypokedexapp.utilities.Constants
 
 class TareasFragment : Fragment() {
 
+    // Método que se ejecuta para crear y mostrar la vista del fragmento
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?, // Contenedor en el que se coloca la vista
+        savedInstanceState: Bundle? // Estado guardado
     ): View? {
-        // Inflar el layout del fragmento
+        // Inflar el layout 'fragment_tareas'
         val view = inflater.inflate(R.layout.fragment_tareas, container, false)
+
+        // Configurar un listener para el botón de búsqueda dentro del fragmento
         view.findViewById<Button>(R.id.btn_busqueda).setOnClickListener {
+            // Llama a 'selectMenuOption' en 'MainActivity' para cambiar al fragmento de búsqueda
             (activity as? MainActivity)?.selectMenuOption(Constants.MENU_SEARCH)
         }
+
+        // Retorna la vista inflada para que el sistema la maneje
         return view
     }
 }

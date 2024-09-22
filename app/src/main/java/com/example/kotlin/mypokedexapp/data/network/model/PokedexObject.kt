@@ -2,19 +2,20 @@ package com.example.kotlin.mypokedexapp.data.network.model
 
 import com.google.gson.annotations.SerializedName
 
-// A data class that represents the structure of the Pokedex object received from the API.
+// Una data class que representa la estructura del objeto Pokedex recibido de la API.
 data class PokedexObject(
-    // The @SerializedName annotation maps the JSON field "count" to this property.
+    // La anotación @SerializedName asigna el campo JSON "count" a esta propiedad.
     @SerializedName("count") val count: Int,
 
     /*
-    * This annotation is used to map the count property to the corresponding field
-    * in the JSON response. When the JSON object from the API contains a field called "count",
-    * it will be automatically mapped to this count property in Kotlin.
-    * val count: Int: Holds the total number of Pokémon available in the Pokedex.
+    * Esta anotación se utiliza para mapear la propiedad count al campo correspondiente
+    * en la respuesta JSON. Cuando el objeto JSON de la API contiene un campo llamado "count",
+    * se asignará automáticamente a esta propiedad count en Kotlin.
+    * val count: Int: Almacena el número total de Pokémon disponibles en la Pokédex.
     * */
 
-    // The @SerializedName annotation maps the JSON field "results" to this property.
-    // It holds an ArrayList of PokemonBase objects, which represents the list of Pokémon data.
+    // La anotación @SerializedName asigna el campo JSON "results" a esta propiedad.
+    // Contiene un ArrayList de objetos PokemonBase, que representa la lista de datos de
+    // los Pokémon.
     @SerializedName("results") val results: ArrayList<com.example.kotlin.mypokedexapp.data.network.model.PokemonBase>
 )

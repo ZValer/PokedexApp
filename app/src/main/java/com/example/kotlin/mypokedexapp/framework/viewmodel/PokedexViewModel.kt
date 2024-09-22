@@ -11,31 +11,40 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-// MainViewModel handles the data for the MainActivity and interacts with the domain layer to fetch the Pokémon list.
-// It extends ViewModel, which allows it to survive configuration changes and maintain data across the app's lifecycle.
-class PokedexViewModel:ViewModel() {
+// PokedexViewModel maneja los datos para MainActivity y se comunica con la capa de dominio
+// para obtener la lista de Pokémon.
+// Extiende ViewModel, lo que le permite sobrevivir a los cambios de configuración y
+// mantener datos a lo largo del ciclo de vida de la aplicación.
+class PokedexViewModel : ViewModel() {
 
-    // MutableLiveData object that holds the PokedexObject data.
-    // This allows the UI (e.g., MainActivity) to observe the data and update the screen when the data changes.
+    // MutableLiveData que contiene los datos del objeto PokedexObject.
+    // Esto permite que la interfaz de usuario (por ejemplo, MainActivity) observe los datos
+    // y actualice la pantalla cuando los datos cambien.
     val pokedexObjectLiveData = MutableLiveData<PokedexObject>()
 
-    // The use case that contains the logic to fetch the Pokémon list.
+    // El caso de uso que contiene la lógica para obtener la lista de Pokémon.
     private val pokemonListRequirement = PokemonListRequirement()
 
-    // Function to fetch the list of Pokémon from the API.
-    // It runs a coroutine to fetch the data on a background thread to avoid blocking the UI.
-    fun getPokemonList(){
-        // Using viewModelScope to launch a coroutine that automatically cancels when the ViewModel is destroyed.
+    // Función para obtener la lista de Pokémon desde la API.
+    // Ejecuta una corrutina para obtener los datos en un hilo en segundo plano y evitar
+    // bloquear la interfaz de usuario.
+    fun getPokemonList() {
+        // Usando viewModelScope para lanzar una corrutina que se cancela automáticamente
+        // cuando el ViewModel se destruye.
         viewModelScope.launch(Dispatchers.IO) {
-            // Fetching the Pokémon list asynchronously. The result is a PokedexObject containing Pokémon details.
+            // Obtiene la lista de Pokémon de forma asíncrona. El resultado es un PokedexObject
+            // que contiene detalles de Pokémon.
             val result: PokedexObject? = pokemonListRequirement(Constants.MAX_POKEMON_NUMBER)
 
-            // Logging the number of Pokémon fetched for debugging purposes.
+            // Registra el número de Pokémon obtenidos para propósitos de depuración.
             Log.d("Salida", result?.count.toString())
-            // Switching to the main thread to update the LiveData, so the UI can be updated.
+            // Cambia al hilo principal para actualizar el LiveData, de manera que la interfaz
+            // de usuario pueda actualizarse.
             CoroutineScope(Dispatchers.Main).launch {
-                // Posting the result (PokedexObject) to LiveData, so the UI can observe and respond to changes.
+                // Publica el resultado (PokedexObject) en LiveData, para que la interfaz de
+                // usuario pueda observar y reaccionar a los cambios.
                 pokedexObjectLiveData.postValue(result!!)
             }
-        }    }
+        }
+    }
 }

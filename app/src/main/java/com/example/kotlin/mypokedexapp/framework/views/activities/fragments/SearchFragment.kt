@@ -12,19 +12,22 @@ import com.example.kotlin.mypokedexapp.framework.views.activities.MainActivity
 import com.example.kotlin.mypokedexapp.utilities.Constants
 
 class SearchFragment : Fragment() {
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var viewModel: SearchViewModel
+    private var _binding: FragmentSearchBinding? = null //layout fragment_search.xml
+    private val binding get() = _binding!! // Propiedad para acceder al binding de forma segura
+    private lateinit var viewModel: SearchViewModel // Declaración del ViewModel
 
+    // Método que se llama para crear la vista del fragmento
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        container: ViewGroup?, // Contenedor en el que se coloca la vista
+        savedInstanceState: Bundle? // Estado guardado
     ): View {
+        // Inicialización del ViewModel usando el proveedor de ViewModels
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
+        // Inflar el layout y obtener el binding
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val root: View = binding.root // Vista raíz del fragmento
 
         // Establecer el listener para el botón "Mis tareas"
         binding.btnMisTareas.setOnClickListener {
@@ -32,11 +35,12 @@ class SearchFragment : Fragment() {
             (activity as? MainActivity)?.selectMenuOption(Constants.MENU_TAREAS)
         }
 
-        return root
+        return root // Retornar la vista raíz
     }
 
+    // Método que se llama cuando la vista del fragmento se destruye
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _binding = null // Limpiar el binding para evitar fugas de memoria
     }
 }

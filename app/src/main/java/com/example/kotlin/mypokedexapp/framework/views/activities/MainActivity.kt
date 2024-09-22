@@ -14,80 +14,86 @@ import com.example.kotlin.mypokedexapp.utilities.Constants
 
 class MainActivity: AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding //layout donde se encuentra la navbar
 
+    // Instancia de ViewModel para esta actividad
     private val viewModel: MainViewModel by viewModels()
 
+    // Variable que mantiene el fragmento actualmente mostrado en la actividad
     private lateinit var currentFragment: Fragment
 
-    private var currentMenuOption:String?= null
+    // Variable para almacenar la opción de menú actual seleccionada
+    private var currentMenuOption: String? = null
 
+    // Método que se ejecuta cuando la actividad se crea
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inicializar el binding
-        initializeBinding()
+        initializeBinding() // Inicializa el binding del layout
 
-        // Inicializar los observadores (si los hay)
+        // Inicializa los observadores (para LiveData u otros datos reactivos)
         initializeObservers()
 
-        // Inicializar los listeners
+        // Inicializa los listeners de las interacciones del usuario (por ejemplo, clics en botones)
         initializeListeners()
 
-        // Establecer el fragmento inicial
+        // Establece el fragmento inicial en la actividad como el 'PokedexFragment'
         exchangeCurrentFragment(PokedexFragment(), Constants.MENU_POKEDEX)
     }
 
-    // Inicializar el binding con ActivityMainBinding
+    // Método para inicializar el binding con el layout de la actividad
     private fun initializeBinding() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)  // Infla el layout
+        setContentView(binding.root)  // Establece el layout inflado como la vista principal
     }
 
-    // Inicializar los observadores de LiveData u otros (puedes agregar lógica aquí más adelante)
-    private fun initializeObservers(){
-
+    // Método reservado para inicializar observadores de datos (puedes agregar lógica más tarde)
+    private fun initializeObservers() {
+        // Aquí se podrían observar cambios en LiveData del ViewModel
     }
 
-    // Cambiar el fragmento actual por uno nuevo, si es necesario
-    private fun exchangeCurrentFragment(newFragment: Fragment, newMenuOption: String){
-        currentFragment = newFragment
+    // Método para cambiar el fragmento actual por uno nuevo
+    private fun exchangeCurrentFragment(newFragment: Fragment, newMenuOption: String) {
+        currentFragment = newFragment  // Actualiza el fragmento actual
 
+        // Inicia una transacción para reemplazar el fragmento actual por el nuevo en el contenedor especificado
         supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_content_main, currentFragment)
-            .commit()
+            .commit()  // Confirma la transacción
 
-        currentMenuOption = newMenuOption
+        currentMenuOption = newMenuOption  // Actualiza la opción de menú actual
     }
 
-    // Inicializar los listeners para las opciones de la barra de navegación
+    // Inicializa los listeners para las interacciones con la barra de navegación
     private fun initializeListeners() {
+        // Listener para el botón "Pokedex", el id llPokedex viene del layout
         binding.appBarMain.llPokedex.setOnClickListener {
-            selectMenuOption(Constants.MENU_POKEDEX)
+            selectMenuOption(Constants.MENU_POKEDEX)  // Cambia a la opción Pokedex
         }
 
+        // Listener para el botón "Search", el id llSearch viene del layout
         binding.appBarMain.llSearch.setOnClickListener {
-            selectMenuOption(Constants.MENU_SEARCH)
+            selectMenuOption(Constants.MENU_SEARCH)  // Cambia a la opción Search
         }
 
-        // Nueva opción para "Mis Tareas"
+        // Listener para el botón "Mis Tareas",  el id llMisTareas viene del layout
         binding.appBarMain.llMisTareas.setOnClickListener {
-            selectMenuOption(Constants.MENU_TAREAS)
+            selectMenuOption(Constants.MENU_TAREAS)  // Cambia a la opción "Mis Tareas"
         }
     }
 
-    // Seleccionar la opción de menú basada en la constante pasada
+    // Método para seleccionar una opción de menú
     public fun selectMenuOption(menuOption: String) {
-        // Evitar volver a cargar el mismo fragmento si ya está seleccionado
+        // Si la opción seleccionada es la misma que la actual, no hace nada
         if (menuOption == currentMenuOption) {
             return
         }
 
-        // Cambiar el fragmento según la opción seleccionada
+        // Cambia el fragmento según la opción seleccionada
         when (menuOption) {
             Constants.MENU_POKEDEX -> exchangeCurrentFragment(PokedexFragment(), Constants.MENU_POKEDEX)
             Constants.MENU_SEARCH -> exchangeCurrentFragment(SearchFragment(), Constants.MENU_SEARCH)
-            Constants.MENU_TAREAS -> exchangeCurrentFragment(TareasFragment(), Constants.MENU_TAREAS) // Navegar a "Mis Tareas"
+            Constants.MENU_TAREAS -> exchangeCurrentFragment(TareasFragment(), Constants.MENU_TAREAS)
         }
     }
 }

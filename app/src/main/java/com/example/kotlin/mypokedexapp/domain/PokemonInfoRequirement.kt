@@ -3,17 +3,18 @@ package com.example.kotlin.mypokedexapp.domain
 import com.example.kotlin.mypokedexapp.data.PokemonRepository
 import com.example.kotlin.mypokedexapp.data.network.model.pokemon.Pokemon
 
-// The PokemonInfoRequirement class serves as a use case in the domain layer.
-// It defines a specific operation: fetching detailed information about a Pokémon.
-// The class interacts with the repository to retrieve the necessary data.
+// Caso de uso en la capa de dominio.
+// Define una operación específica: obtener información detallada sobre un Pokémon.
+// La clase interactúa con el repositorio para recuperar los datos necesarios.
 class PokemonInfoRequirement {
-
-    // A reference to the PokemonRepository, which is responsible for fetching data from the data source (API).
+    // Una referencia al PokemonRepository, que es responsable de obtener datos de la fuente de
+    // datos (API).
     private val repository = PokemonRepository()
 
-    // The invoke function is a Kotlin operator function, which allows the class to be called like a function.
-    // It fetches detailed information about a Pokémon using its number and returns a Pokemon object.
-    // If the request fails (e.g., network error), it returns null.
+    // La función invoke es una función operadora de Kotlin, que permite que la clase se llame como
+    // una función.
+    // Obtiene información detallada sobre un Pokémon usando su número y devuelve un objeto Pokémon.
+    // Si la solicitud falla (por ejemplo, error de red), devuelve null.
     suspend operator fun invoke(
         numberPokemon: Int
     ): com.example.kotlin.mypokedexapp.data.network.model.pokemon.Pokemon? =
