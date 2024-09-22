@@ -5,10 +5,21 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/texto_lista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aquí se mostrarán tus tareas"
         android:layout_centerInParent="true"
         android:textSize="18sp"
         android:textStyle="bold"/>
+
+    <!-- Botón "Búsqueda" -->
+    <Button
+        android:id="@+id/btn_busqueda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Búsqueda"
+        android:layout_above="@id/texto_lista"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
 </RelativeLayout>
