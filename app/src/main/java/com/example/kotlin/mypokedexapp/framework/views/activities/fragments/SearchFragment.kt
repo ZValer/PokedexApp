@@ -8,14 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlin.mypokedexapp.databinding.FragmentSearchBinding
 import com.example.kotlin.mypokedexapp.framework.viewmodel.SearchViewModel
+import com.example.kotlin.mypokedexapp.framework.views.activities.MainActivity
+import com.example.kotlin.mypokedexapp.utilities.Constants
 
-class SearchFragment: Fragment() {
+class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-
     private lateinit var viewModel: SearchViewModel
 
     override fun onCreateView(
@@ -27,6 +25,12 @@ class SearchFragment: Fragment() {
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        // Establecer el listener para el botón "Mis tareas"
+        binding.btnMisTareas.setOnClickListener {
+            // Llamar al método de MainActivity para cambiar el fragmento
+            (activity as? MainActivity)?.selectMenuOption(Constants.MENU_TAREAS)
+        }
 
         return root
     }

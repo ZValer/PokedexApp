@@ -77,7 +77,7 @@ class MainActivity: AppCompatActivity() {
     }
 
     // Seleccionar la opción de menú basada en la constante pasada
-    private fun selectMenuOption(menuOption: String) {
+    public fun selectMenuOption(menuOption: String) {
         // Evitar volver a cargar el mismo fragmento si ya está seleccionado
         if (menuOption == currentMenuOption) {
             return
