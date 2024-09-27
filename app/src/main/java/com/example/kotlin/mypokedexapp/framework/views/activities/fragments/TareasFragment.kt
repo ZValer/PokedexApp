@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kotlin.mypokedexapp.data.network.model.SuperHero
 import com.example.kotlin.mypokedexapp.databinding.FragmentTareasBinding
 import com.example.kotlin.mypokedexapp.framework.adapters.SuperHeroAdapter
 import com.example.kotlin.mypokedexapp.framework.views.activities.MainActivity
@@ -40,7 +42,16 @@ class TareasFragment : Fragment() {
     // Método para inicializar el RecyclerView
     private fun initRecyclerView() {
         binding.recyclerSuperHero.layoutManager = LinearLayoutManager(context)
-        binding.recyclerSuperHero.adapter = SuperHeroAdapter(SuperHeroProvider.superheroList)
+        binding.recyclerSuperHero.adapter =
+            SuperHeroAdapter(SuperHeroProvider.superheroList) { superHero ->
+                onItemSelected(superHero)
+            }
+    }
+
+    // Método que se ejecuta al seleccionar un ítem del RecyclerView
+    private fun onItemSelected(superHero: SuperHero) {
+        // Mostrar el nombre del superhéroe en un Toast
+        Toast.makeText(requireContext(), superHero.superhero, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

@@ -9,7 +9,7 @@ import com.example.kotlin.mypokedexapp.framework.adapters.viewholders.SuperHeroV
 
 
 // Recibe lista de Superheroes
-class SuperHeroAdapter(private val superheroList:List<SuperHero>) : RecyclerView.Adapter<SuperHeroViewHolder>() {
+class SuperHeroAdapter(private val superheroList:List<SuperHero>, private val onClickListener:(SuperHero) -> Unit) : RecyclerView.Adapter<SuperHeroViewHolder>() {
 
     //Pasarle el item o layout al view holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperHeroViewHolder {
@@ -21,7 +21,7 @@ class SuperHeroAdapter(private val superheroList:List<SuperHero>) : RecyclerView
     // Pasa por cada uno de los items y nos devuelve el render de viewholder
     override fun onBindViewHolder(holder: SuperHeroViewHolder, position: Int) {
         val item = superheroList[position]
-        holder.render(item)
+        holder.render(item, onClickListener)
     }
 
     override fun getItemCount(): Int = superheroList.size

@@ -10,26 +10,13 @@ import com.example.kotlin.mypokedexapp.databinding.ItemSuperheroBinding
 class SuperHeroViewHolder (val view: View): RecyclerView.ViewHolder(view){
     val binding = ItemSuperheroBinding.bind(view)
 
-    fun render(superHeroModel: SuperHero){
+    fun render(superHeroModel: SuperHero, onClickListener:(SuperHero) -> Unit){
         binding.tvSuperHeroName.text = superHeroModel.superhero
         binding.tvRealName.text = superHeroModel.realName
         binding.tvPublisher.text = superHeroModel.publisher
         Glide.with(binding.ivSuperHero.context).load(superHeroModel.photo).into(binding.ivSuperHero)
 
-        // Click en la imagen para desplegar nombre real
-        binding.ivSuperHero.setOnClickListener {
-            Toast.makeText(
-                binding.ivSuperHero.context,
-                superHeroModel.realName,
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        // Click en el item para desplegar nombre
-        itemView.setOnClickListener {Toast.makeText(
-            binding.ivSuperHero.context,
-            superHeroModel.superhero,
-            Toast.LENGTH_SHORT
-        ).show() }
+        // Click en el item para mostrar el nombre de super heroe
+        itemView.setOnClickListener { onClickListener(superHeroModel)}
     }
 }
