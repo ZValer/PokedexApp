@@ -4,44 +4,47 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlin.mypokedexapp.R
-import com.example.kotlin.mypokedexapp.data.network.model.SuperHeroProvider
+import com.example.kotlin.mypokedexapp.databinding.FragmentTareasBinding
 import com.example.kotlin.mypokedexapp.framework.adapters.SuperHeroAdapter
 import com.example.kotlin.mypokedexapp.framework.views.activities.MainActivity
 import com.example.kotlin.mypokedexapp.utilities.Constants
+import com.example.kotlin.mypokedexapp.data.network.model.SuperHeroProvider
 
 class TareasFragment : Fragment() {
+    private var _binding: FragmentTareasBinding? = null
+    private val binding get() = _binding!!
 
-    // Método que se ejecuta para crear y mostrar la vista del fragmento
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, // Contenedor en el que se coloca la vista
-        savedInstanceState: Bundle? // Estado guardado
-    ): View? {
-        // Inflar el layout 'fragment_tareas'
-        val view = inflater.inflate(R.layout.fragment_tareas, container, false)
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // Inflar el layout y obtener el binding
+        _binding = FragmentTareasBinding.inflate(inflater, container, false)
 
-        // Configurar un listener para el botón de búsqueda dentro del fragmento
-        view.findViewById<Button>(R.id.btn_busqueda).setOnClickListener {
+        // Configurar un listener para el botón de búsqueda
+        binding.btnBusqueda.setOnClickListener {
             // Llama a 'selectMenuOption' en 'MainActivity' para cambiar al fragmento de búsqueda
             (activity as? MainActivity)?.selectMenuOption(Constants.MENU_SEARCH)
         }
 
         // Inicializar el RecyclerView
-        initRecyclerView(view)
+        initRecyclerView()
 
-        // Retorna la vista inflada para que el sistema la maneje
-        return view
+        // Retorna la vista raíz del binding
+        return binding.root
     }
 
     // Método para inicializar el RecyclerView
-    private fun initRecyclerView(view: View) {
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerSuperHero)
-        recyclerView.layoutManager = LinearLayoutManager(context) // 'context' en lugar de 'this'
-        recyclerView.adapter = SuperHeroAdapter(SuperHeroProvider.superheroList)
+    private fun initRecyclerView() {
+        binding.recyclerSuperHero.layoutManager = LinearLayoutManager(context)
+        binding.recyclerSuperHero.adapter = SuperHeroAdapter(SuperHeroProvider.superheroList)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

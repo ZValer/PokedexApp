@@ -78,7 +78,7 @@ android {
     }
 
     buildFeatures {
-        // Enabling ViewBinding to easily bind views in the layout to code
+        // Enabling ViewBinding as true to easily bind views in the layout
         viewBinding = true
 
         /*
