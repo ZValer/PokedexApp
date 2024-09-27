@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlin.mypokedexapp.data.network.model.SuperHero
 import com.example.kotlin.mypokedexapp.databinding.FragmentTareasBinding
@@ -42,7 +43,7 @@ class TareasFragment : Fragment() {
 
     // Método para inicializar el RecyclerView
     private fun initRecyclerView() {
-        val manager = LinearLayoutManager(context)
+        val manager = GridLayoutManager(context, 2)
         val decoration = DividerItemDecoration(context, manager.orientation)
         binding.recyclerSuperHero.layoutManager = manager
         binding.recyclerSuperHero.adapter =
