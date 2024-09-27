@@ -43,14 +43,12 @@ class TareasFragment : Fragment() {
 
     // Método para inicializar el RecyclerView
     private fun initRecyclerView() {
-        val manager = GridLayoutManager(context, 2)
-        val decoration = DividerItemDecoration(context, manager.orientation)
+        val manager = LinearLayoutManager(context)
         binding.recyclerSuperHero.layoutManager = manager
         binding.recyclerSuperHero.adapter =
             SuperHeroAdapter(SuperHeroProvider.superheroList) { superHero ->
                 onItemSelected(superHero)
             }
-        binding.recyclerSuperHero.addItemDecoration(decoration)
     }
 
     // Método que se ejecuta al seleccionar un ítem del RecyclerView
