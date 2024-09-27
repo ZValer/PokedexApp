@@ -115,6 +115,7 @@ dependencies {
     // Gson converter for parsing JSON responses using Retrofit
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    // Glide libraries
     // Glide library for image loading and caching
     implementation("com.github.bumptech.glide:glide:4.12.0")
     // Annotation processor for Glide to generate necessary code during compilation

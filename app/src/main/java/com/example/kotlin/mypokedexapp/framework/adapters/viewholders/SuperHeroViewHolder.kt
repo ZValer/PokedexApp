@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.kotlin.mypokedexapp.R
 import com.example.kotlin.mypokedexapp.data.network.model.SuperHero
 
@@ -18,5 +19,6 @@ class SuperHeroViewHolder (val view: View): RecyclerView.ViewHolder(view){
         superHero.text = superHeroModel.superhero
         realName.text = superHeroModel.realName
         publisher.text = superHeroModel.publisher
+        Glide.with(photo.context).load(superHeroModel.photo).into(photo)
     }
 }
